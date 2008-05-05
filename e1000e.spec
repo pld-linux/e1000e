@@ -82,7 +82,12 @@ EOF
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%install_kernel_modules -m src/%{pname} -d kernel/drivers/net
+%install_kernel_modules -m src/%{pname} -d kernel/drivers/net -n %{pname} -s current
+# blacklist kernel module
+cat > $RPM_BUILD_ROOT/etc/modprobe.d/%{_kernel_ver}/%{pname}.conf <<'EOF'
+blacklist e1000e
+alias e1000e e1000e-current
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -96,4 +101,5 @@ rm -rf $RPM_BUILD_ROOT
 %files	-n kernel%{_alt_kernel}-net-%{pname}
 %defattr(644,root,root,755)
 %doc e1000e.7 README
+/etc/modprobe.d/%{_kernel_ver}/%{pname}.conf
 /lib/modules/%{_kernel_ver}/kernel/drivers/net/%{pname}*.ko*
