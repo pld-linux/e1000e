@@ -35,14 +35,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This package contains the Linux driver for the Intel(R) PRO/1000
 family of 10/100/1000 Ethernet network adapters. This driver is
-designed to work with the Intel® 82571/2/3/4 PCI-E family of
-gigabit adapters and 82567 controllers.
+designed to work with the Intel® 82571/2/3/4 PCI-E family of gigabit
+adapters and 82567 controllers.
 
 %description -l pl.UTF-8
 Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych
-10/100/1000Mbit z rodziny Intel(R) PRO/1000. Ten sterownik jest 
-stworzony aby pracować z kartami gigabitowymi rodziny
-Intel® 82571/2/3/4 PCI-E oraz kontrolerami 82567.
+10/100/1000Mbit z rodziny Intel(R) PRO/1000. Ten sterownik jest
+stworzony aby pracować z kartami gigabitowymi rodziny Intel®
+82571/2/3/4 PCI-E oraz kontrolerami 82567.
 
 %package -n kernel%{_alt_kernel}-net-%{pname}
 Summary:	Intel(R) PRO/1000e driver for Linux
@@ -58,21 +58,21 @@ Requires(postun):	%releq_kernel
 %description -n kernel%{_alt_kernel}-net-%{pname}
 This package contains the Linux driver for the Intel(R) PRO/1000
 family of 10/100/1000 Ethernet network adapters. This driver is
-designed to work with the Intel® 82571/2/3/4 PCI-E family of
-gigabit adapters and 82567 controllers.
+designed to work with the Intel® 82571/2/3/4 PCI-E family of gigabit
+adapters and 82567 controllers.
 
 %description -n kernel%{_alt_kernel}-net-%{pname} -l pl.UTF-8
 Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych
-10/100/1000Mbit z rodziny Intel(R) PRO/1000. Ten sterownik jest 
-stworzony aby pracować z kartami gigabitowymi rodziny
-Intel® 82571/2/3/4 PCI-E oraz kontrolerami 82567.
+10/100/1000Mbit z rodziny Intel(R) PRO/1000. Ten sterownik jest
+stworzony aby pracować z kartami gigabitowymi rodziny Intel®
+82571/2/3/4 PCI-E oraz kontrolerami 82567.
 
 %prep
 %setup -q -n %{pname}-%{version}
 cat > src/Makefile <<'EOF'
 obj-m := e1000e.o
 e1000e-objs := netdev.o ethtool.o param.o 82571.o ich8lan.o es2lan.o \
-	phy.o lib.o kcompat.o 
+	phy.o lib.o kcompat.o
 
 EXTRA_CFLAGS=-DDRIVER_E1000E
 EOF
