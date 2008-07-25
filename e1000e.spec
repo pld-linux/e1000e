@@ -16,7 +16,7 @@
 %undefine	with_userspace
 %endif
 
-%define		rel	1
+%define		rel	2
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel(R) PRO/1000e
