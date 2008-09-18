@@ -19,19 +19,19 @@
 
 %define         rel     7
 %define         pname   e1000e
-Summary:        Intel(R) PRO/1000e driver for Linux
-Summary(pl.UTF-8):      Sterownik do karty Intel(R) PRO/1000e
-Name:           %{pname}%{_alt_kernel}
-Version:        0.4.1.7
-Release:        %{rel}
-License:        GPL v2
-Group:          Base/Kernel
-Source0:        http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
+Summary:	Intel(R) PRO/1000e driver for Linux
+Summary(pl.UTF-8):	Sterownik do karty Intel(R) PRO/1000e
+Name:		%{pname}%{_alt_kernel}
+Version:	0.4.1.7
+Release:	%{rel}
+License:	GPL v2
+Group:		Base/Kernel
+Source0:	http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
 # Source0-md5:  6ee50d62db27d7af0abfd0cbc61fb76f
-URL:            http://dl.sourceforge.net/e1000/
-%{?with_dist_kernel:BuildRequires:      kernel%{_alt_kernel}-module-build >= 3:2.6.7}
-BuildRequires:  rpmbuild(macros) >= 1.330
-BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+URL:		http://dl.sourceforge.net/e1000/
+%{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.7}
+BuildRequires:	rpmbuild(macros) >= 1.330
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This package contains the Linux driver for the Intel(R) PRO/1000
@@ -46,14 +46,14 @@ stworzony aby pracowa. z kartami gigabitowymi rodziny Intel
 82571/2/3/4 PCI-E oraz kontrolerami 82567.
 
 %package -n kernel%{_alt_kernel}-net-%{pname}
-Summary:        Intel(R) PRO/1000e driver for Linux
-Summary(pl.UTF-8):      Sterownik do karty Intel(R) PRO/1000e
-Release:        %{rel}@%{_kernel_ver_str}
-Group:          Base/Kernel
-Requires(post,postun):  /sbin/depmod
+Summary:	Intel(R) PRO/1000e driver for Linux
+Summary(pl.UTF-8):	Sterownik do karty Intel(R) PRO/1000e
+Release:	%{rel}@%{_kernel_ver_str}
+Group:		Base/Kernel
+Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
 %requires_releq_kernel_up
-Requires(postun):       %releq_kernel_up
+Requires(postun):	%releq_kernel_up
 %endif
 
 %description -n kernel%{_alt_kernel}-net-%{pname}
@@ -69,14 +69,14 @@ stworzony aby pracowa. z kartami gigabitowymi rodziny Intel
 82571/2/3/4 PCI-E oraz kontrolerami 82567.
 
 %package -n kernel%{_alt_kernel}-smp-net-%{pname}
-Summary:        Intel(R) PRO/1000e driver for Linux
-Summary(pl.UTF-8):      Sterownik do karty Intel(R) PRO/1000e
-Release:        %{rel}@%{_kernel_ver_str}
-Group:          Base/Kernel
-Requires(post,postun):  /sbin/depmod
+Summary:	Intel(R) PRO/1000e driver for Linux
+Summary(pl.UTF-8):	Sterownik do karty Intel(R) PRO/1000e
+Release:	%{rel}@%{_kernel_ver_str}
+Group:		Base/Kernel
+Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
 %requires_releq_kernel_smp
-Requires(postun):       %releq_kernel_smp
+Requires(postun):	%releq_kernel_smp
 %endif
 
 %description -n kernel%{_alt_kernel}-smp-net-%{pname}
