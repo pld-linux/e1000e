@@ -5,7 +5,6 @@
 %bcond_without	smp		# don't build SMP module
 %bcond_without	up		# don't build UP module
 %bcond_with	verbose		# verbose build (V=1)
-%bcond_with	grsec_kernel	# build for kernel-grsecurity
 
 %ifarch sparc
 %undefine	with_smp
@@ -13,9 +12,6 @@
 
 %if %{without kernel}
 %undefine with_dist_kernel
-%endif
-%if %{with kernel} && %{with dist_kernel} && %{with grsec_kernel}
-%define	alt_kernel	grsecurity
 %endif
 %if "%{_alt_kernel}" != "%{nil}"
 %undefine	with_userspace
@@ -37,7 +33,6 @@ URL:            http://dl.sourceforge.net/e1000/
 BuildRequires:  rpmbuild(macros) >= 1.330
 BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-
 %description
 This package contains the Linux driver for the Intel(R) PRO/1000
 family of 10/100/1000 Ethernet network adapters. This driver is
@@ -50,7 +45,6 @@ Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych
 stworzony aby pracowa. z kartami gigabitowymi rodziny Intel
 82571/2/3/4 PCI-E oraz kontrolerami 82567.
 
-
 %package -n kernel%{_alt_kernel}-net-%{pname}
 Summary:        Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):      Sterownik do karty Intel(R) PRO/1000e
@@ -61,7 +55,6 @@ Requires(post,postun):  /sbin/depmod
 %requires_releq_kernel_up
 Requires(postun):       %releq_kernel_up
 %endif
-Provides:	kernel(e1000e)
 
 %description -n kernel%{_alt_kernel}-net-%{pname}
 This package contains the Linux driver for the Intel(R) PRO/1000
@@ -75,7 +68,6 @@ Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych
 stworzony aby pracowa. z kartami gigabitowymi rodziny Intel
 82571/2/3/4 PCI-E oraz kontrolerami 82567.
 
-
 %package -n kernel%{_alt_kernel}-smp-net-%{pname}
 Summary:        Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):      Sterownik do karty Intel(R) PRO/1000e
@@ -86,7 +78,6 @@ Requires(post,postun):  /sbin/depmod
 %requires_releq_kernel_smp
 Requires(postun):       %releq_kernel_smp
 %endif
-Provides:	kernel(e1000e)
 
 %description -n kernel%{_alt_kernel}-smp-net-%{pname}
 This package contains the Linux SMP driver for the Intel(R) PRO/1000
@@ -99,7 +90,6 @@ Ten pakiet zawiera sterownik dla Linuksa SMP do kart sieciowych
 10/100/1000Mbit z rodziny Intel(R) PRO/1000. Ten sterownik jest
 stworzony aby pracowa. z kartami gigabitowymi rodziny Intel
 82571/2/3/4 PCI-E oraz kontrolerami 82567.
-
 
 %prep
 %setup -q -n %{pname}-%{version}
