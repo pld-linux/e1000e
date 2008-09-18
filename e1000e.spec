@@ -35,6 +35,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This package contains the Linux driver for the Intel(R) PRO/1000
 family of 10/100/1000 Ethernet network adapters. This driver is
+designed to work with the Intel(R) 82571/2/3/4 PCI-E family of gigabit
+adapters and 82567 controllers.
+
+%description -l en.UTF-8
+This package contains the Linux driver for the Intel(R) PRO/1000
+family of 10/100/1000 Ethernet network adapters. This driver is
 designed to work with the Intel® 82571/2/3/4 PCI-E family of gigabit
 adapters and 82567 controllers.
 
@@ -56,6 +62,12 @@ Requires(postun):	%releq_kernel
 %endif
 
 %description -n kernel%{_alt_kernel}-net-%{pname}
+This package contains the Linux driver for the Intel(R) PRO/1000
+family of 10/100/1000 Ethernet network adapters. This driver is
+designed to work with the Intel(R) 82571/2/3/4 PCI-E family of gigabit
+adapters and 82567 controllers.
+
+%description -n kernel%{_alt_kernel}-net-%{pname} -l en.utf-8
 This package contains the Linux driver for the Intel(R) PRO/1000
 family of 10/100/1000 Ethernet network adapters. This driver is
 designed to work with the Intel® 82571/2/3/4 PCI-E family of gigabit
