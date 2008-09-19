@@ -19,7 +19,7 @@
 # nothing to be placed to debuginfo package
 %define		_enable_debug_packages	0
 
-%define		rel	7
+%define		rel	8
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux
@@ -34,6 +34,8 @@ Source0:	http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
 URL:		http://dl.sourceforge.net/e1000/
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.7}
 BuildRequires:	rpmbuild(macros) >= 1.330
+# broken
+ExcludeArch:	sparc ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
