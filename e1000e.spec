@@ -11,7 +11,7 @@
 %endif
 
 %if %{without kernel}
-%undefine with_dist_kernel
+%undefine 	with_dist_kernel
 %endif
 %if "%{_alt_kernel}" != "%{nil}"
 %undefine	with_userspace
@@ -19,7 +19,7 @@
 # nothing to be placed to debuginfo package
 %define		_enable_debug_packages	0
 
-%define		rel	8
+%define		rel		9
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux
@@ -63,10 +63,7 @@ Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Release:	%{rel}@%{_kernel_vermagic}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
-%if %{with dist_kernel}
-%requires_releq_kernel_up
-Requires(postun):	%releq_kernel_up
-%endif
+%{?with_dist_kernel:Requires:	kernel%{_alt_kernel}(vermagic) = %{_kernel_ver}}
 
 %description -n kernel%{_alt_kernel}-net-%{pname}
 This package contains the Linux driver for the Intel(R) PRO/1000
