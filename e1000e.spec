@@ -89,7 +89,7 @@ e1000e-objs := netdev.o ethtool.o param.o kcompat.o e1000_80003es2lan.o \
 e1000_82571.o e1000_ich8lan.o e1000_mac.o e1000_manage.o e1000_nvm.o \
 e1000_phy.o
 
-EXTRA_CFLAGS=-DDRIVER_E1000E
+EXTRA_CFLAGS=-DDRIVER_E1000E -DCONFIG_E1000E_SEPARATE_TX_HANDLER
 EOF
 
 %build
