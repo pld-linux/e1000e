@@ -16,7 +16,7 @@
 %undefine	with_userspace
 %endif
 
-%define		rel	9
+%define		rel	10
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux
