@@ -16,18 +16,18 @@
 %undefine	with_userspace
 %endif
 
-%define		rel	5
+%define		rel	1
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
-Version:	0.5.11.2
+Version:	0.5.18.3
 Release:	%{rel}
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
-# Source0-md5:	a3e511ad3ca5ce720bb5b87a46ea402d
+# Source0-md5:	28cc552e51420b301a2b751d74180287
 URL:		http://dl.sourceforge.net/e1000/
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRequires:	rpmbuild(macros) >= 1.379
@@ -91,6 +91,7 @@ e1000_phy.o
 
 EXTRA_CFLAGS=-DDRIVER_E1000E -DCONFIG_E1000E_SEPARATE_TX_HANDLER
 EOF
+# add -DE1000E_NO_NAPI to disable NAPI
 
 %build
 %build_kernel_modules -C src -m %{pname}
