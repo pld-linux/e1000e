@@ -28,6 +28,7 @@ License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
 # Source0-md5:	896aae3699f4268228da5c4e14ae8e2f
+Patch0:		%{pname}-kernel.patch
 URL:		http://dl.sourceforge.net/e1000/
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRequires:	rpmbuild(macros) >= 1.379
@@ -83,6 +84,7 @@ stworzony aby pracować z kartami gigabitowymi rodziny Intel®
 
 %prep
 %setup -q -n %{pname}-%{version}
+%patch0 -p1
 cat > src/Makefile <<'EOF'
 obj-m := e1000e.o
 e1000e-objs := netdev.o ethtool.o param.o e1000_82571.o e1000_ich8lan.o \
