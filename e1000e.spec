@@ -16,18 +16,18 @@
 %undefine	with_userspace
 %endif
 
-%define		rel	19
+%define		rel	1
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
-Version:	1.2.17
+Version:	1.3.10a
 Release:	%{rel}
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
-# Source0-md5:	fa082df37999d3a04321223a46e4f53e
+# Source0-md5:	04b8856433d5e582ab41bdd3b24f20a5
 URL:		http://dl.sourceforge.net/e1000/
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRequires:	rpmbuild(macros) >= 1.379
@@ -85,11 +85,11 @@ stworzony aby pracować z kartami gigabitowymi rodziny Intel®
 %setup -q -n %{pname}-%{version}
 cat > src/Makefile <<'EOF'
 obj-m := e1000e.o
-e1000e-objs := netdev.o ethtool.o param.o e1000_82571.o e1000_ich8lan.o \
-e1000_80003es2lan.o e1000_mac.o e1000_nvm.o e1000_phy.o e1000_manage.o \
-kcompat.o
+e1000e-objs := netdev.o ethtool.o param.o \
+82571.o ich8lan.o 80003es2lan.o \
+mac.o nvm.o phy.o manage.o kcompat.o
 
-EXTRA_CFLAGS=-DDRIVER_E1000E -DCONFIG_E1000E_SEPARATE_TX_HANDLER -DVLAN_GROUP_ARRAY_LEN=VLAN_N_VID
+EXTRA_CFLAGS=-DDRIVER_E1000E -DCONFIG_E1000E_SEPARATE_TX_HANDLER
 EOF
 # add -DE1000E_NO_NAPI to disable NAPI
 
