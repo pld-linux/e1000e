@@ -26,9 +26,9 @@ Version:	1.9.5
 Release:	%{rel}
 License:	GPL v2
 Group:		Base/Kernel
-Source0:	http://dl.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
 # Source0-md5:	5c694a617138cb84fa5944aa9a463117
-URL:		http://dl.sourceforge.net/e1000/
+URL:		http://downloads.sourceforge.net/e1000/
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRequires:	rpmbuild(macros) >= 1.379
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
