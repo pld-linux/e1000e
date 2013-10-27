@@ -36,7 +36,6 @@ exit 1
 %define		rel	19
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
-Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
 Version:	2.4.14
@@ -56,12 +55,6 @@ family of 10/100/1000 Ethernet network adapters. This driver is
 designed to work with the Intel(R) 82571/2/3/4 PCI-E family of gigabit
 adapters and 82567 controllers.
 
-%description -l en.UTF-8
-This package contains the Linux driver for the Intel® PRO/1000 family
-of 10/100/1000 Ethernet network adapters. This driver is designed to
-work with the Intel® 82571/2/3/4 PCI-E family of gigabit adapters and
-82567 controllers.
-
 %description -l pl.UTF-8
 Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych
 10/100/1000Mbit z rodziny Intel® PRO/1000. Ten sterownik jest
@@ -71,7 +64,6 @@ stworzony aby pracować z kartami gigabitowymi rodziny Intel®
 %define	kernel_pkg()\
 %package -n kernel%{_alt_kernel}-net-%{pname}\
 Summary:	Intel(R) PRO/1000e driver for Linux %{_kernelsrcdir}:%{__kernel_rpmvr}\
-Summary(en.UTF-8):	Intel® PRO/1000e driver for Linux\
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e\
 Release:	%{rel}@%{_kernel_ver_str}\
 Group:		Base/Kernel\
@@ -86,12 +78,6 @@ This package contains the Linux driver for the Intel(R) PRO/1000\
 family of 10/100/1000 Ethernet network adapters. This driver is\
 designed to work with the Intel(R) 82571/2/3/4 PCI-E family of gigabit\
 adapters and 82567 controllers.\
-\
-%description -n kernel%{_alt_kernel}-net-%{pname} -l en.UTF-8\
-This package contains the Linux driver for the Intel® PRO/1000 family\
-of 10/100/1000 Ethernet network adapters. This driver is designed to\
-work with the Intel® 82571/2/3/4 PCI-E family of gigabit adapters and\
-82567 controllers.\
 \
 %description -n kernel%{_alt_kernel}-net-%{pname} -l pl.UTF-8\
 Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych\
