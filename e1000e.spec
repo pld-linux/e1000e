@@ -1,22 +1,10 @@
-# Module for kernels <2.6.24
 #
 # Conditional build:
 %bcond_without	dist_kernel	# allow non-distribution kernel
-%bcond_without	kernel		# don't build kernel modules
-%bcond_with	userspace	# don't build userspace programs
 %bcond_with	verbose		# verbose build (V=1)
 
 %if %{without kernel}
 %undefine with_dist_kernel
-%endif
-
-# The goal here is to have main, userspace, package built once with
-# simple release number, and only rebuild kernel packages with kernel
-# version as part of release number, without the need to bump release
-# with every kernel change.
-%if 0%{?_pld_builder:1} && %{with kernel} && %{with userspace}
-%{error:kernel and userspace cannot be built at the same time on PLD builders}
-exit 1
 %endif
 
 %if "%{_alt_kernel}" != "%{nil}"
@@ -39,7 +27,7 @@ Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
 Version:	2.4.14
-Release:	%{rel}%{?with_kernel:@%{_kernel_ver_str}}
+Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
@@ -85,13 +73,11 @@ Ten pakiet zawiera sterownik dla Linuksa do kart sieciowych\
 stworzony aby pracować z kartami gigabitowymi rodziny Intel®\
 82571/2/3/4 PCI-E oraz kontrolerami 82567.\
 \
-%if %{with kernel}\
 %files -n kernel%{_alt_kernel}-net-%{pname}\
 %defattr(755,root,root,755)\
 %doc e1000e.7 README\
 /etc/modprobe.d/%{_kernel_ver}/%{pname}.conf\
 /lib/modules/%{_kernel_ver}/kernel/drivers/net/%{pname}*.ko*\
-%endif\
 \
 %post	-n kernel%{_alt_kernel}-net-%{pname}\
 %depmod %{_kernel_ver}\
@@ -114,7 +100,7 @@ alias e1000e e1000e-current\
 EOF\
 %{nil}
 
-%{?with_kernel:%{expand:%kpkg}}
+%{expand:%kpkg}
 
 %prep
 %setup -q -n %{pname}-%{version}
@@ -130,16 +116,14 @@ EOF
 # add -DE1000E_NO_NAPI to disable NAPI
 
 %build
-%{?with_kernel:%{expand:%bkpkg}}
+%{expand:%bkpkg}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%if %{with kernel}
 %{expand:%ikpkg}
 cp -a installed/* $RPM_BUILD_ROOT
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
