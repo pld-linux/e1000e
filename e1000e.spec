@@ -26,12 +26,12 @@ exit 1
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
-Version:	2.4.14
+Version:	3.1.0.2
 Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
-# Source0-md5:	05bae01409bb699f14297d726df2aa23
+# Source0-md5:	b8d770160691edd247a90070f45642ce
 URL:		http://downloads.sourceforge.net/e1000/
 BuildRequires:	rpm-build-macros >= 1.678
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
