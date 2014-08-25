@@ -21,7 +21,7 @@ exit 1
 %define		bkpkg	%(echo %{_build_kernels} | tr , '\\n' | while read n ; do echo %%undefine alt_kernel ; [ -z "$n" ] || echo %%define alt_kernel $n ; echo %%build_kernel_pkg ; done)
 %define		ikpkg	%(echo %{_build_kernels} | tr , '\\n' | while read n ; do echo %%undefine alt_kernel ; [ -z "$n" ] || echo %%define alt_kernel $n ; echo %%install_kernel_pkg ; done)
 
-%define		rel	1
+%define		rel	2
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
@@ -109,7 +109,7 @@ cat > src/Makefile <<'EOF'
 obj-m := e1000e.o
 e1000e-objs := netdev.o ethtool.o param.o \
 82571.o ich8lan.o 80003es2lan.o \
-mac.o nvm.o phy.o manage.o kcompat.o
+mac.o nvm.o phy.o manage.o kcompat.o ptp.o
 
 EXTRA_CFLAGS=-DDRIVER_E1000E -DCONFIG_E1000E_SEPARATE_TX_HANDLER
 EOF
