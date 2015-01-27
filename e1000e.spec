@@ -2,6 +2,9 @@
 # Conditional build:
 %bcond_with	verbose		# verbose build (V=1)
 
+# nothing to be placed to debuginfo package
+%define		_enable_debug_packages	0
+
 %define		rel	3
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
