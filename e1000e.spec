@@ -1,11 +1,6 @@
 #
 # Conditional build:
-%bcond_without	dist_kernel	# allow non-distribution kernel
 %bcond_with	verbose		# verbose build (V=1)
-
-%if %{without kernel}
-%undefine with_dist_kernel
-%endif
 
 %if "%{_alt_kernel}" != "%{nil}"
 %if 0%{?build_kernels:1}
@@ -34,7 +29,7 @@ Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
 # Source0-md5:	b8d770160691edd247a90070f45642ce
 URL:		http://downloads.sourceforge.net/e1000/
 BuildRequires:	rpm-build-macros >= 1.678
-%{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
+%{?with_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,10 +51,8 @@ Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e\
 Release:	%{rel}@%{_kernel_ver_str}\
 Group:		Base/Kernel\
 Requires(post,postun):	/sbin/depmod\
-%if %{with dist_kernel}\
 %requires_releq_kernel\
 Requires(postun):	%releq_kernel\
-%endif\
 \
 %description -n kernel%{_alt_kernel}-net-%{pname}\
 This package contains the Linux driver for the Intel(R) PRO/1000\
