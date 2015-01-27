@@ -2,21 +2,7 @@
 # Conditional build:
 %bcond_with	verbose		# verbose build (V=1)
 
-%if "%{_alt_kernel}" != "%{nil}"
-%if 0%{?build_kernels:1}
-%{error:alt_kernel and build_kernels are mutually exclusive}
-exit 1
-%endif
-%global		_build_kernels		%{alt_kernel}
-%else
-%global		_build_kernels		%{?build_kernels:,%{?build_kernels}}
-%endif
-
-%define		kpkg	%(echo %{_build_kernels} | tr , '\\n' | while read n ; do echo %%undefine alt_kernel ; [ -z "$n" ] || echo %%define alt_kernel $n ; echo %%kernel_pkg ; done)
-%define		bkpkg	%(echo %{_build_kernels} | tr , '\\n' | while read n ; do echo %%undefine alt_kernel ; [ -z "$n" ] || echo %%define alt_kernel $n ; echo %%build_kernel_pkg ; done)
-%define		ikpkg	%(echo %{_build_kernels} | tr , '\\n' | while read n ; do echo %%undefine alt_kernel ; [ -z "$n" ] || echo %%define alt_kernel $n ; echo %%install_kernel_pkg ; done)
-
-%define		rel	2
+%define		rel	3
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
@@ -28,8 +14,8 @@ Group:		Base/Kernel
 Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
 # Source0-md5:	b8d770160691edd247a90070f45642ce
 URL:		http://downloads.sourceforge.net/e1000/
-BuildRequires:	rpm-build-macros >= 1.678
-%{?with_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
+BuildRequires:	rpm-build-macros >= 1.701
+%{expand:%buildrequires_kernel kernel%%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -93,7 +79,7 @@ alias e1000e e1000e-current\
 EOF\
 %{nil}
 
-%{expand:%kpkg}
+%{expand:%create_kernel_packages}
 
 %prep
 %setup -q -n %{pname}-%{version}
@@ -109,13 +95,13 @@ EOF
 # add -DE1000E_NO_NAPI to disable NAPI
 
 %build
-%{expand:%bkpkg}
+%{expand:%build_kernel_packages}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{expand:%ikpkg}
+%{expand:%install_kernel_packages}
 cp -a installed/* $RPM_BUILD_ROOT
 
 %clean
