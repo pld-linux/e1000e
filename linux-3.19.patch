@@ -1,0 +1,11 @@
+--- e1000e-3.1.0.2/src/netdev.c~	2014-06-26 22:13:33.000000000 +0200
++++ e1000e-3.1.0.2/src/netdev.c	2015-03-30 19:57:06.958655445 +0200
+@@ -7126,7 +7126,7 @@
+ #endif /* CONFIG_PM */
+ 
+ #ifndef USE_LEGACY_PM_SUPPORT
+-#ifdef CONFIG_PM_RUNTIME
++#if defined(CONFIG_PM_RUNTIME) || ( LINUX_VERSION_CODE >= KERNEL_VERSION(3,19,0) )
+ static int e1000e_pm_runtime_idle(struct device *dev)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev);
