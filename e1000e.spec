@@ -5,18 +5,17 @@
 # nothing to be placed to debuginfo package
 %define		_enable_debug_packages	0
 
-%define		rel	4
+%define		rel	1
 %define		pname	e1000e
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
-Version:	3.1.0.2
+Version:	3.3.4
 Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
-# Source0-md5:	b8d770160691edd247a90070f45642ce
-Patch0:		linux-3.19.patch
+# Source0-md5:	5c6d010341868f753cf983cbe4467db5
 URL:		http://downloads.sourceforge.net/e1000/
 BuildRequires:	rpm-build-macros >= 1.701
 %{expand:%buildrequires_kernel kernel%%{_alt_kernel}-module-build >= 3:2.6.20.2}
@@ -87,7 +86,6 @@ EOF\
 
 %prep
 %setup -q -n %{pname}-%{version}
-%patch0 -p1
 
 cat > src/Makefile <<'EOF'
 obj-m := e1000e.o
