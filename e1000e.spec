@@ -10,13 +10,13 @@
 Summary:	Intel(R) PRO/1000e driver for Linux
 Summary(pl.UTF-8):	Sterownik do karty Intel® PRO/1000e
 Name:		%{pname}%{_alt_kernel}
-Version:	3.3.4
+Version:	3.3.5
 Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
 Source0:	http://downloads.sourceforge.net/e1000/%{pname}-%{version}.tar.gz
-# Source0-md5:	5c6d010341868f753cf983cbe4467db5
-URL:		http://downloads.sourceforge.net/e1000/
+# Source0-md5:	b9de7f9be86984d91a3de851781fab4e
+URL:		https://sourceforge.net/projects/e1000/
 BuildRequires:	rpm-build-macros >= 1.701
 %{expand:%buildrequires_kernel kernel%%{_alt_kernel}-module-build >= 3:2.6.20.2}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -93,9 +93,8 @@ e1000e-objs := netdev.o ethtool.o param.o \
 82571.o ich8lan.o 80003es2lan.o \
 mac.o nvm.o phy.o manage.o kcompat.o ptp.o
 
-EXTRA_CFLAGS=-DDRIVER_E1000E -DCONFIG_E1000E_SEPARATE_TX_HANDLER
 EOF
-# add -DE1000E_NO_NAPI to disable NAPI
+# add -DE1000E_NO_NAPI to disable NAPI, -DNO_PTP_SUPPORT to disable Precision Time Protocol
 
 %build
 %{expand:%build_kernel_packages}
@@ -105,6 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
 %{expand:%install_kernel_packages}
+# NOTE: there is e1000e.7 man page placed in %%_docdir, as multiple packages would conflict in not versioned %%_mandir
 cp -a installed/* $RPM_BUILD_ROOT
 
 %clean
